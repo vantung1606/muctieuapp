@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Goal {
+  id             String   @id @default(uuid())
+  title          String
+  target_amount  Float
+  current_amount Float    @default(0)
+  deadline       DateTime
+  saving_plan    Json
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
