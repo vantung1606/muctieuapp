@@ -72,46 +72,57 @@ export default function HomePage() {
 
   return (
     <main className="flex-1 max-w-6xl mx-auto w-full p-6 md:p-10">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+      <header className="flex items-center justify-between mb-8 md:mb-12">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight flex items-center gap-3">
-            <Target className="text-emerald-500" size={36} />
-            Mục Tiêu App
+          <h1 className="text-[var(--text-h1)] font-black text-slate-900 tracking-tighter flex items-center gap-2">
+            <div className="bg-emerald-500 p-2 rounded-2xl shadow-lg shadow-emerald-200">
+              <Target className="text-white" size={24} />
+            </div>
+            <span>Mục Tiêu <span className="text-emerald-500">App</span></span>
           </h1>
-          <p className="text-slate-500 mt-2 text-lg">Quản lý tài chính cá nhân một cách thông minh.</p>
+          <p className="text-slate-400 mt-1 text-sm md:text-base font-medium">Smart financial tracking</p>
         </div>
         
+        {/* Desktop Button */}
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="btn-primary flex items-center justify-center gap-2 py-3 px-6 text-lg"
+          className="hidden md:flex btn-primary items-center gap-2"
         >
           <Plus size={20} /> Thêm mục tiêu
         </button>
       </header>
 
+      {/* Mobile Floating Action Button */}
+      <button 
+        onClick={() => setIsModalOpen(true)}
+        className="md:hidden fixed bottom-8 right-6 w-16 h-16 bg-emerald-500 text-white rounded-full shadow-2xl shadow-emerald-400 z-50 flex items-center justify-center active:scale-90 transition-transform"
+      >
+        <Plus size={32} />
+      </button>
+
       {/* Stats Overview */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="bg-emerald-100 p-3 rounded-xl text-emerald-600">
-            <Wallet size={24} />
+      <section className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+        <div className="card-premium !p-5 flex flex-col justify-between h-32 md:h-auto">
+          <div className="bg-emerald-100 w-10 h-10 rounded-xl flex items-center justify-center text-emerald-600 mb-2">
+            <Wallet size={20} />
           </div>
           <div>
-            <p className="text-sm text-slate-500 font-medium">Tổng tiết kiệm</p>
-            <p className="text-2xl font-bold text-slate-800">{totalSaved.toLocaleString()} đ</p>
+            <p className="text-[10px] md:text-sm text-slate-400 font-bold uppercase tracking-widest">Tiết kiệm</p>
+            <p className="text-lg md:text-2xl font-black text-slate-800 leading-tight">{totalSaved.toLocaleString()} đ</p>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-          <div className="bg-blue-100 p-3 rounded-xl text-blue-600">
-            <PieChart size={24} />
+        <div className="card-premium !p-5 flex flex-col justify-between h-32 md:h-auto">
+          <div className="bg-blue-100 w-10 h-10 rounded-xl flex items-center justify-center text-blue-600 mb-2">
+            <PieChart size={20} />
           </div>
           <div>
-            <p className="text-sm text-slate-500 font-medium">Tiến độ tổng thể</p>
-            <p className="text-2xl font-bold text-slate-800">{overallProgress.toFixed(1)}%</p>
+            <p className="text-[10px] md:text-sm text-slate-400 font-bold uppercase tracking-widest">Tiến độ</p>
+            <p className="text-lg md:text-2xl font-black text-slate-800 leading-tight">{overallProgress.toFixed(1)}%</p>
           </div>
         </div>
-        <div className="bg-emerald-500 p-6 rounded-2xl shadow-lg shadow-emerald-200 text-white flex flex-col justify-between">
-          <p className="text-emerald-100 text-sm font-medium">Lời khuyên hôm nay</p>
-          <p className="font-semibold text-lg">"Tiết kiệm là bước đầu của tự do tài chính."</p>
+        <div className="col-span-2 md:col-span-1 bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-[2rem] shadow-xl shadow-emerald-200 text-white flex flex-col justify-center">
+          <p className="text-emerald-100 text-[10px] font-bold uppercase tracking-widest mb-1">Mẹo hay</p>
+          <p className="font-bold text-sm md:text-base leading-snug">"Tích tiểu thành đại, tự do tài chính đang gần bạn hơn."</p>
         </div>
       </section>
 
@@ -120,7 +131,7 @@ export default function HomePage() {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
         </div>
       ) : goals.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,350px),1fr))] gap-8">
           {goals.map((goal: any) => (
             <GoalCard 
               key={goal.id} 
