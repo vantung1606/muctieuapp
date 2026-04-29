@@ -66,8 +66,8 @@ export default function HomePage() {
     }
   };
 
-  const totalTarget = goals.reduce((acc: number, goal: any) => acc + goal.target_amount, 0);
-  const totalSaved = goals.reduce((acc: number, goal: any) => acc + goal.current_amount, 0);
+  const totalTarget = Array.isArray(goals) ? goals.reduce((acc: number, goal: any) => acc + (goal.target_amount || 0), 0) : 0;
+  const totalSaved = Array.isArray(goals) ? goals.reduce((acc: number, goal: any) => acc + (goal.current_amount || 0), 0) : 0;
   const overallProgress = totalTarget > 0 ? (totalSaved / totalTarget) * 100 : 0;
 
   return (
